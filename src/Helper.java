@@ -1,12 +1,7 @@
 import java.util.Scanner;
 public class Helper {
 
-    public static void main(String[] args) {
-        //Test Methods
-        Scanner scan = new Scanner(System.in);
 
-        System.out.println(getPositiveNonZeroInt(scan, "enter INt"));
-    }
 
     //This Method Loops until a valid integer input is received. Returns int value.
     public static int getInt(Scanner in, String prompt){
