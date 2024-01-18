@@ -38,10 +38,10 @@ public class Helper {
                 if(x <= max && x >= min){
                     done = true;
                 }else{
-                    System.out.println("Invalid input. Do better.");
+                    System.out.println("Out of Range. Please Try Again.");
                 }
             }else{
-                System.out.println("Invalid input. Do better.");
+                System.out.println("Out of Range. Please Try Again.");
             }
             in.nextLine(); //clear buffer
         }while(!done);
