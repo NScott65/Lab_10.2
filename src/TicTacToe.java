@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class TicTacToe {
     public static String[][] gameBoard = new String[3][3];
     static Scanner scan = new Scanner(System.in);
@@ -19,6 +20,10 @@ public class TicTacToe {
         System.out.println("Welcome to Tic-Tac-Toe!");
         clearBoard();
         do {
+            for(int i = 0; i < gameBoard.length; i++){
+                for(int j = 0; i < gameBoard.length; j++)
+            }
+
             do {
                 System.out.println("Player 1: ");
                 row1 = Helper.getRangedInt(scan, "Enter your move row: ", 1, 3);
@@ -48,9 +53,15 @@ public class TicTacToe {
                 }
 
             }while(!done2);
+
             done2 = false;
-            
-            
+
+
+
+            yN = Helper.getYNConfirm(scan, "Would you like to continue?");
+            if(yN.equalsIgnoreCase("False")){
+                done = true;
+            }
 
         }while(!done);
 
@@ -89,6 +100,14 @@ public class TicTacToe {
         return tF;
     }
 
+    public static boolean isWin(){}
 
+    public static boolean isColWin(){}
+
+    public static boolean isRowWin(){}
+
+    public static boolean isDiagonalWin(){}
+
+    public static boolean isTie(){}
 
 }
