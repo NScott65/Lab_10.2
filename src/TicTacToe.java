@@ -100,14 +100,118 @@ public class TicTacToe {
         return tF;
     }
 
-    public static boolean isWin(){}
+    public static boolean isWin(){
+        boolean win = false;
+        
+        
+        
+        
+        return win;
+    }
 
-    public static boolean isColWin(){}
+    public static boolean isColWin(){
+        boolean win = false;
+        
+        
+        if(gameBoard[1][1].equalsIgnoreCase("X") 
+                && gameBoard[2][1].equalsIgnoreCase("X")
+                && gameBoard[3][1].equalsIgnoreCase("X")
+        ){
+            win = true;
+        } else if (gameBoard[1][2].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[3][2].equalsIgnoreCase("X")) {
+            win = true;
+        } else if (gameBoard[1][3].equalsIgnoreCase("X")
+                && gameBoard[2][3].equalsIgnoreCase("X")
+                && gameBoard[3][3].equalsIgnoreCase("X")) {
+            win = true;
+        }
 
-    public static boolean isRowWin(){}
+        return win;
+    }
 
-    public static boolean isDiagonalWin(){}
+    public static boolean isRowWin(){
+        boolean win = false;
 
-    public static boolean isTie(){}
+        if(gameBoard[1][1].equalsIgnoreCase("X")
+                && gameBoard[1][2].equalsIgnoreCase("X")
+                && gameBoard[1][3].equalsIgnoreCase("X")
+        ){
+            win = true;
+        } else if (gameBoard[2][1].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[2][3].equalsIgnoreCase("X")) {
+            win = true;
+        } else if (gameBoard[3][1].equalsIgnoreCase("X")
+                && gameBoard[3][2].equalsIgnoreCase("X")
+                && gameBoard[3][3].equalsIgnoreCase("X")) {
+            win = true;
+        }
+        
+        return win;
+    }
+
+    public static boolean isDiagonalWin(){
+        boolean win = false;
+
+        if(gameBoard[1][1].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[3][3].equalsIgnoreCase("X")
+        ){
+            win = true;
+        } else if (gameBoard[1][3].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[3][1].equalsIgnoreCase("X")) {
+            win = true;
+        } 
+        
+        return win;
+    }
+
+    public static boolean isTie(){
+            boolean win = false;
+            
+        if(gameBoard[1][1].equalsIgnoreCase("X")
+                && gameBoard[2][1].equalsIgnoreCase("X")
+                && gameBoard[3][1].equalsIgnoreCase("X")
+        ){
+            win = false;
+        } else if (gameBoard[1][2].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[3][2].equalsIgnoreCase("X")) {
+            win = false;
+        } else if (gameBoard[1][3].equalsIgnoreCase("X")
+                && gameBoard[2][3].equalsIgnoreCase("X")
+                && gameBoard[3][3].equalsIgnoreCase("X")) {
+            win = false;
+        }else if(gameBoard[1][1].equalsIgnoreCase("X")
+                && gameBoard[1][2].equalsIgnoreCase("X")
+                && gameBoard[1][3].equalsIgnoreCase("X")
+        ){
+            win = false;
+        } else if (gameBoard[2][1].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[2][3].equalsIgnoreCase("X")) {
+            win = false;
+        } else if (gameBoard[3][1].equalsIgnoreCase("X")
+                && gameBoard[3][2].equalsIgnoreCase("X")
+                && gameBoard[3][3].equalsIgnoreCase("X")) {
+            win = false;
+        }else if(gameBoard[1][1].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[3][3].equalsIgnoreCase("X")
+        ){
+            win = false;
+        } else if (gameBoard[1][3].equalsIgnoreCase("X")
+                && gameBoard[2][2].equalsIgnoreCase("X")
+                && gameBoard[3][1].equalsIgnoreCase("X")) {
+            win = false;
+        }else{
+            win = true;
+        }
+        
+        return win;
+    }
 
 }
