@@ -5,6 +5,10 @@ public class TicTacToe {
     static Scanner scan = new Scanner(System.in);
 
     public static boolean done2 = false;
+
+    public static String player1 = "X";
+
+    public static String player2 = "O";
     public static void main(String[] args) {
         int row1 = 1;
         int col1 = 1;
@@ -20,9 +24,7 @@ public class TicTacToe {
         System.out.println("Welcome to Tic-Tac-Toe!");
         clearBoard();
         do {
-            for(int i = 0; i < gameBoard.length; i++){
-                for(int j = 0; i < gameBoard.length; j++)
-            }
+
 
             do {
                 System.out.println("Player 1: ");
@@ -30,7 +32,7 @@ public class TicTacToe {
                 col1 = Helper.getRangedInt(scan, "Enter your move col: ", 1, 3);
                 p1Choice = isValidMove(row1 - 1, col1 - 1);
                 if ( p1Choice == true) {
-                    gameBoard[row1 - 1][col1 - 1] = "X";
+                    gameBoard[row1 - 1][col1 - 1] = player1;
                     displayBoard();
                     done2 = true;
                 }else{
@@ -45,7 +47,7 @@ public class TicTacToe {
                 col2 = Helper.getRangedInt(scan, "Enter your move col: ", 1, 3);
                 p2Choice = isValidMove(row2 - 1, col2 - 1);
                 if ( p2Choice == true) {
-                    gameBoard[row2 - 1][col2 - 1] = "O";
+                    gameBoard[row2 - 1][col2 - 1] = player2;
                     displayBoard();
                     done2 = true;
                 }else{
@@ -100,117 +102,134 @@ public class TicTacToe {
         return tF;
     }
 
-    public static boolean isWin(){
-        boolean win = false;
-        
-        
-        
-        
-        return win;
-    }
-
-    public static boolean isColWin(){
-        boolean win = false;
-        
-        
-        if(gameBoard[1][1].equalsIgnoreCase("X") 
-                && gameBoard[2][1].equalsIgnoreCase("X")
-                && gameBoard[3][1].equalsIgnoreCase("X")
-        ){
-            win = true;
-        } else if (gameBoard[1][2].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[3][2].equalsIgnoreCase("X")) {
-            win = true;
-        } else if (gameBoard[1][3].equalsIgnoreCase("X")
-                && gameBoard[2][3].equalsIgnoreCase("X")
-                && gameBoard[3][3].equalsIgnoreCase("X")) {
-            win = true;
-        }
-
-        return win;
-    }
-
-    public static boolean isRowWin(){
+    public static boolean isWin(String Player){
         boolean win = false;
 
-        if(gameBoard[1][1].equalsIgnoreCase("X")
-                && gameBoard[1][2].equalsIgnoreCase("X")
-                && gameBoard[1][3].equalsIgnoreCase("X")
-        ){
+        if(isColWin(Player)){
             win = true;
-        } else if (gameBoard[2][1].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[2][3].equalsIgnoreCase("X")) {
+        }else if(isRowWin(Player)){
             win = true;
-        } else if (gameBoard[3][1].equalsIgnoreCase("X")
-                && gameBoard[3][2].equalsIgnoreCase("X")
-                && gameBoard[3][3].equalsIgnoreCase("X")) {
+        }else if(isDiagonalWin(Player)){
             win = true;
-        }
-        
-        return win;
-    }
-
-    public static boolean isDiagonalWin(){
-        boolean win = false;
-
-        if(gameBoard[1][1].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[3][3].equalsIgnoreCase("X")
-        ){
-            win = true;
-        } else if (gameBoard[1][3].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[3][1].equalsIgnoreCase("X")) {
-            win = true;
-        } 
-        
-        return win;
-    }
-
-    public static boolean isTie(){
-            boolean win = false;
-            
-        if(gameBoard[1][1].equalsIgnoreCase("X")
-                && gameBoard[2][1].equalsIgnoreCase("X")
-                && gameBoard[3][1].equalsIgnoreCase("X")
-        ){
-            win = false;
-        } else if (gameBoard[1][2].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[3][2].equalsIgnoreCase("X")) {
-            win = false;
-        } else if (gameBoard[1][3].equalsIgnoreCase("X")
-                && gameBoard[2][3].equalsIgnoreCase("X")
-                && gameBoard[3][3].equalsIgnoreCase("X")) {
-            win = false;
-        }else if(gameBoard[1][1].equalsIgnoreCase("X")
-                && gameBoard[1][2].equalsIgnoreCase("X")
-                && gameBoard[1][3].equalsIgnoreCase("X")
-        ){
-            win = false;
-        } else if (gameBoard[2][1].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[2][3].equalsIgnoreCase("X")) {
-            win = false;
-        } else if (gameBoard[3][1].equalsIgnoreCase("X")
-                && gameBoard[3][2].equalsIgnoreCase("X")
-                && gameBoard[3][3].equalsIgnoreCase("X")) {
-            win = false;
-        }else if(gameBoard[1][1].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[3][3].equalsIgnoreCase("X")
-        ){
-            win = false;
-        } else if (gameBoard[1][3].equalsIgnoreCase("X")
-                && gameBoard[2][2].equalsIgnoreCase("X")
-                && gameBoard[3][1].equalsIgnoreCase("X")) {
-            win = false;
         }else{
+            win = false;
+        }
+
+
+
+
+        return win;
+    }
+
+    public static boolean isColWin(String Player){
+        boolean win = false;
+
+
+        if(gameBoard[1][1].equalsIgnoreCase(Player)
+                && gameBoard[2][1].equalsIgnoreCase(Player)
+                && gameBoard[3][1].equalsIgnoreCase(Player)
+        ){
+            win = true;
+        } else if (gameBoard[1][2].equalsIgnoreCase(Player)
+                && gameBoard[2][2].equalsIgnoreCase(Player)
+                && gameBoard[3][2].equalsIgnoreCase(Player)) {
+            win = true;
+        } else if (gameBoard[1][3].equalsIgnoreCase(Player)
+                && gameBoard[2][3].equalsIgnoreCase(Player)
+                && gameBoard[3][3].equalsIgnoreCase(Player)) {
             win = true;
         }
-        
+
+        return win;
+    }
+
+    public static boolean isRowWin(String Player){
+        boolean win = false;
+
+        if(gameBoard[1][1].equalsIgnoreCase(Player)
+                && gameBoard[1][2].equalsIgnoreCase(Player)
+                && gameBoard[1][3].equalsIgnoreCase(Player)
+        ){
+            win = true;
+        } else if (gameBoard[2][1].equalsIgnoreCase(Player)
+                && gameBoard[2][2].equalsIgnoreCase(Player)
+                && gameBoard[2][3].equalsIgnoreCase(Player)) {
+            win = true;
+        } else if (gameBoard[3][1].equalsIgnoreCase(Player)
+                && gameBoard[3][2].equalsIgnoreCase(Player)
+                && gameBoard[3][3].equalsIgnoreCase(Player)) {
+            win = true;
+        }
+
+        return win;
+    }
+
+    public static boolean isDiagonalWin(String Player){
+        boolean win = false;
+
+        if(gameBoard[1][1].equalsIgnoreCase(Player)
+                && gameBoard[2][2].equalsIgnoreCase(Player)
+                && gameBoard[3][3].equalsIgnoreCase(Player)
+        ){
+            win = true;
+        } else if (gameBoard[1][3].equalsIgnoreCase(Player)
+                && gameBoard[2][2].equalsIgnoreCase(Player)
+                && gameBoard[3][1].equalsIgnoreCase(Player)) {
+            win = true;
+        }
+
+        return win;
+    }
+
+    public static boolean isTie(String Player){
+        boolean win = false;
+
+        for(int r = 0; r > gameBoard.length; r++){
+            for(int c = 0; c > gameBoard.length; c++){
+
+
+        if(gameBoard[r][c].equalsIgnoreCase("-")) {
+            if (gameBoard[1][1].equalsIgnoreCase(Player)
+                    && gameBoard[2][1].equalsIgnoreCase(Player)
+                    && gameBoard[3][1].equalsIgnoreCase(Player)
+            ) {
+                win = false;
+            } else if (gameBoard[1][2].equalsIgnoreCase(Player)
+                    && gameBoard[2][2].equalsIgnoreCase(Player)
+                    && gameBoard[3][2].equalsIgnoreCase(Player)) {
+                win = false;
+            } else if (gameBoard[1][3].equalsIgnoreCase(Player)
+                    && gameBoard[2][3].equalsIgnoreCase(Player)
+                    && gameBoard[3][3].equalsIgnoreCase(Player)) {
+                win = false;
+            } else if (gameBoard[1][1].equalsIgnoreCase(Player)
+                    && gameBoard[1][2].equalsIgnoreCase(Player)
+                    && gameBoard[1][3].equalsIgnoreCase(Player)
+            ) {
+                win = false;
+            } else if (gameBoard[2][1].equalsIgnoreCase(Player)
+                    && gameBoard[2][2].equalsIgnoreCase(Player)
+                    && gameBoard[2][3].equalsIgnoreCase(Player)) {
+                win = false;
+            } else if (gameBoard[3][1].equalsIgnoreCase(Player)
+                    && gameBoard[3][2].equalsIgnoreCase(Player)
+                    && gameBoard[3][3].equalsIgnoreCase(Player)) {
+                win = false;
+            } else if (gameBoard[1][1].equalsIgnoreCase(Player)
+                    && gameBoard[2][2].equalsIgnoreCase(Player)
+                    && gameBoard[3][3].equalsIgnoreCase(Player)
+            ) {
+                win = false;
+            } else if (gameBoard[1][3].equalsIgnoreCase(Player)
+                    && gameBoard[2][2].equalsIgnoreCase(Player)
+                    && gameBoard[3][1].equalsIgnoreCase(Player)) {
+                win = false;
+            } else {
+                win = true;
+            }
+                }
+            }
+        }
         return win;
     }
 
