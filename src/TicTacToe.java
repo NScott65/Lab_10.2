@@ -18,20 +18,22 @@ public class TicTacToe {
         boolean p1Choice = false;
         boolean p2Choice = false;
         String yN = "";
+        boolean p1Win = false;
+        boolean p2Win = false;
+        boolean tie = false;
 
 
 
         System.out.println("Welcome to Tic-Tac-Toe!");
         clearBoard();
         do {
-
-
             do {
+
                 System.out.println("Player 1: ");
                 row1 = Helper.getRangedInt(scan, "Enter your move row: ", 1, 3);
                 col1 = Helper.getRangedInt(scan, "Enter your move col: ", 1, 3);
                 p1Choice = isValidMove(row1 - 1, col1 - 1);
-                if ( p1Choice == true) {
+                if (p1Choice) {
                     gameBoard[row1 - 1][col1 - 1] = player1;
                     displayBoard();
                     done2 = true;
@@ -39,14 +41,27 @@ public class TicTacToe {
                     System.out.println("Your input was invalid. Try again");
                 }
 
+
+
             }while(!done2);
-            done2 = false;
+            p2Win = isWin(player2);
+            p1Win = isWin(player1);
+            tie = isTie();
+            if(p2Win || p1Win || tie){
+                done2 = true;
+            }else{
+                done2 = false;
+            }
+
             do {
+                if(done2){
+                    break;
+                }
                 System.out.println("Player 2: ");
                 row2 = Helper.getRangedInt(scan, "Enter your move row: ", 1, 3);
                 col2 = Helper.getRangedInt(scan, "Enter your move col: ", 1, 3);
                 p2Choice = isValidMove(row2 - 1, col2 - 1);
-                if ( p2Choice == true) {
+                if (p2Choice) {
                     gameBoard[row2 - 1][col2 - 1] = player2;
                     displayBoard();
                     done2 = true;
@@ -54,15 +69,33 @@ public class TicTacToe {
                     System.out.println("Your input was invalid. Try again");
                 }
 
+
             }while(!done2);
+            p2Win = isWin(player2);
+            p1Win = isWin(player1);
+            tie = isTie();
 
-            done2 = false;
+            if(p2Win || p1Win || tie){
+                done2 = true;
+            }else{
+                done2 = false;
+            }
 
+            if(p1Win){
+                System.out.println("Player 1 Wins!");
+            }else if(p2Win){
+                System.out.println("Player 2 Wins!");
+            }else if(tie){
+                System.out.println("There is a tie!");
+            }
 
-
-            yN = Helper.getYNConfirm(scan, "Would you like to continue?");
-            if(yN.equalsIgnoreCase("False")){
-                done = true;
+            if(done2) {
+                yN = Helper.getYNConfirm(scan, "Would you like to play again?");
+                if (yN.equalsIgnoreCase("False")) {
+                    done = true;
+                }else{
+                    clearBoard();
+                }
             }
 
         }while(!done);
@@ -103,40 +136,40 @@ public class TicTacToe {
     }
 
     public static boolean isWin(String Player){
-        boolean win = false;
+        boolean winm = false;
 
         if(isColWin(Player)){
-            win = true;
+            winm = true;
         }else if(isRowWin(Player)){
-            win = true;
+            winm = true;
         }else if(isDiagonalWin(Player)){
-            win = true;
+            winm = true;
         }else{
-            win = false;
+            winm = false;
         }
 
 
 
 
-        return win;
+        return winm;
     }
 
     public static boolean isColWin(String Player){
         boolean win = false;
 
 
-        if(gameBoard[1][1].equalsIgnoreCase(Player)
-                && gameBoard[2][1].equalsIgnoreCase(Player)
-                && gameBoard[3][1].equalsIgnoreCase(Player)
+        if(gameBoard[0][0].equalsIgnoreCase(Player)
+                && gameBoard[1][0].equalsIgnoreCase(Player)
+                && gameBoard[2][0].equalsIgnoreCase(Player)
         ){
             win = true;
-        } else if (gameBoard[1][2].equalsIgnoreCase(Player)
-                && gameBoard[2][2].equalsIgnoreCase(Player)
-                && gameBoard[3][2].equalsIgnoreCase(Player)) {
+        } else if (gameBoard[0][1].equalsIgnoreCase(Player)
+                && gameBoard[1][1].equalsIgnoreCase(Player)
+                && gameBoard[2][1].equalsIgnoreCase(Player)) {
             win = true;
-        } else if (gameBoard[1][3].equalsIgnoreCase(Player)
-                && gameBoard[2][3].equalsIgnoreCase(Player)
-                && gameBoard[3][3].equalsIgnoreCase(Player)) {
+        } else if (gameBoard[0][2].equalsIgnoreCase(Player)
+                && gameBoard[1][2].equalsIgnoreCase(Player)
+                && gameBoard[2][2].equalsIgnoreCase(Player)) {
             win = true;
         }
 
@@ -146,18 +179,18 @@ public class TicTacToe {
     public static boolean isRowWin(String Player){
         boolean win = false;
 
-        if(gameBoard[1][1].equalsIgnoreCase(Player)
-                && gameBoard[1][2].equalsIgnoreCase(Player)
-                && gameBoard[1][3].equalsIgnoreCase(Player)
+        if(gameBoard[0][0].equalsIgnoreCase(Player)
+                && gameBoard[0][1].equalsIgnoreCase(Player)
+                && gameBoard[0][2].equalsIgnoreCase(Player)
         ){
             win = true;
-        } else if (gameBoard[2][1].equalsIgnoreCase(Player)
-                && gameBoard[2][2].equalsIgnoreCase(Player)
-                && gameBoard[2][3].equalsIgnoreCase(Player)) {
+        } else if (gameBoard[1][0].equalsIgnoreCase(Player)
+                && gameBoard[1][1].equalsIgnoreCase(Player)
+                && gameBoard[1][2].equalsIgnoreCase(Player)) {
             win = true;
-        } else if (gameBoard[3][1].equalsIgnoreCase(Player)
-                && gameBoard[3][2].equalsIgnoreCase(Player)
-                && gameBoard[3][3].equalsIgnoreCase(Player)) {
+        } else if (gameBoard[2][0].equalsIgnoreCase(Player)
+                && gameBoard[2][1].equalsIgnoreCase(Player)
+                && gameBoard[2][2].equalsIgnoreCase(Player)) {
             win = true;
         }
 
@@ -167,68 +200,34 @@ public class TicTacToe {
     public static boolean isDiagonalWin(String Player){
         boolean win = false;
 
-        if(gameBoard[1][1].equalsIgnoreCase(Player)
+        if(gameBoard[0][0].equalsIgnoreCase(Player)
+                && gameBoard[1][1].equalsIgnoreCase(Player)
                 && gameBoard[2][2].equalsIgnoreCase(Player)
-                && gameBoard[3][3].equalsIgnoreCase(Player)
         ){
             win = true;
-        } else if (gameBoard[1][3].equalsIgnoreCase(Player)
-                && gameBoard[2][2].equalsIgnoreCase(Player)
-                && gameBoard[3][1].equalsIgnoreCase(Player)) {
+        } else if (gameBoard[0][2].equalsIgnoreCase(Player)
+                && gameBoard[1][1].equalsIgnoreCase(Player)
+                && gameBoard[2][0].equalsIgnoreCase(Player)) {
             win = true;
         }
 
         return win;
     }
 
-    public static boolean isTie(String Player){
+    public static boolean isTie(){
         boolean win = false;
 
-        for(int r = 0; r > gameBoard.length; r++){
-            for(int c = 0; c > gameBoard.length; c++){
-
-
-        if(gameBoard[r][c].equalsIgnoreCase("-")) {
-            if (gameBoard[1][1].equalsIgnoreCase(Player)
-                    && gameBoard[2][1].equalsIgnoreCase(Player)
-                    && gameBoard[3][1].equalsIgnoreCase(Player)
-            ) {
-                win = false;
-            } else if (gameBoard[1][2].equalsIgnoreCase(Player)
-                    && gameBoard[2][2].equalsIgnoreCase(Player)
-                    && gameBoard[3][2].equalsIgnoreCase(Player)) {
-                win = false;
-            } else if (gameBoard[1][3].equalsIgnoreCase(Player)
-                    && gameBoard[2][3].equalsIgnoreCase(Player)
-                    && gameBoard[3][3].equalsIgnoreCase(Player)) {
-                win = false;
-            } else if (gameBoard[1][1].equalsIgnoreCase(Player)
-                    && gameBoard[1][2].equalsIgnoreCase(Player)
-                    && gameBoard[1][3].equalsIgnoreCase(Player)
-            ) {
-                win = false;
-            } else if (gameBoard[2][1].equalsIgnoreCase(Player)
-                    && gameBoard[2][2].equalsIgnoreCase(Player)
-                    && gameBoard[2][3].equalsIgnoreCase(Player)) {
-                win = false;
-            } else if (gameBoard[3][1].equalsIgnoreCase(Player)
-                    && gameBoard[3][2].equalsIgnoreCase(Player)
-                    && gameBoard[3][3].equalsIgnoreCase(Player)) {
-                win = false;
-            } else if (gameBoard[1][1].equalsIgnoreCase(Player)
-                    && gameBoard[2][2].equalsIgnoreCase(Player)
-                    && gameBoard[3][3].equalsIgnoreCase(Player)
-            ) {
-                win = false;
-            } else if (gameBoard[1][3].equalsIgnoreCase(Player)
-                    && gameBoard[2][2].equalsIgnoreCase(Player)
-                    && gameBoard[3][1].equalsIgnoreCase(Player)) {
-                win = false;
-            } else {
-                win = true;
-            }
-                }
-            }
+        if(!gameBoard[0][0].equalsIgnoreCase("-")
+                && !gameBoard[0][1].equalsIgnoreCase("-")
+                && !gameBoard[0][2].equalsIgnoreCase("-")
+                && !gameBoard[1][0].equalsIgnoreCase("-")
+                && !gameBoard[1][1].equalsIgnoreCase("-")
+                && !gameBoard[1][2].equalsIgnoreCase("-")
+                && !gameBoard[2][0].equalsIgnoreCase("-")
+                && !gameBoard[2][1].equalsIgnoreCase("-")
+                && !gameBoard[2][2].equalsIgnoreCase("-")
+        ){
+            win = true;
         }
         return win;
     }
